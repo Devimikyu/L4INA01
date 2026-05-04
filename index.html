@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-
-    <body>
-<h1 align="center">Neila O</h1>
-<h2 align="center">Licence 2 des Sciences du Langage</h2>
-<center><img src="./assets/img/logo.png" width="60%" /><img src="./assets/img/mimi.jpg" width="30%" /></center>
+<head>
+    <meta charset="utf-8">
+    <!-- Titre affiché dans l'onglet du navigateur -->
+    <title>Analyse des données dans un fichier</title>
+    <!-- Chargement du script JS avant le body pour qu'il soit disponible -->
+    <script type="text/javascript" src="assets/js/code.js" defer></script>
+    <!--Feuille de style-->
+    <link rel="stylesheet" href="assets/css/monstyle.css" />
+</head>
+<body>
+     <!--contenus global de la page-->
+    <div id="page">
+        <div id="container">
+              <!--introduction-->      
+ <div id="intro">
+<h1>Neila O</h1>
+<h2>Licence 2 des Sciences du Langage</h2>
+<img src="./assets/img/logo.png" width="60%" /><img src="./assets/img/mimi.jpg" width="30%" />
 <p>Mon CV des trois dernières années :</p>
-<table border="2px">
+ <!--tableau-->
+<table>
     <thead>
-        <tr><th>année universitaire</th><th>Statut</th></tr>
+        <tr><th>Année universitaire</th><th>Status</th></tr>
     </thead>
     <tbody>
         <tr><td>2025-2026</td><td>L2 SDL mineur informatique</td></tr>
@@ -29,9 +39,79 @@
     <li><i>I used to have a plan</i>, Alessandra Olanow</li>
     <li><i>If we were villains</i>, M.L. Rio</li>
 </ol>
-
+ <!--lien de la fac-->
 <footer>
   <p><a href="http://www.univ-paris3.fr/">Sorbonne Nouvelle.</a></p>
 </footer>
-    </body>
+</div>
+
+            <h1 id="titre-analyse" style="text-align:center;">Analyse des <span style="color:#ff85a1">données</span> dans un fichier</h1>
+         <!-- Bouton qui affiche ou masque la section d'aide -->
+            <button onclick="toggleAide()">Aide ?</button>
+            <div id="aide" style="display:none; background:#fff5f8; border:1px solid #ffb3c6; border-radius:10px; padding:10px; margin:10px auto;">
+                 <!-- Section d'aide, cachée par défaut -->
+                <ul>
+                    <li><strong>Charger un fichier :</strong> sélectionnez un fichier .txt</li>
+                    <li><strong>Délimiteurs :</strong> caractères pour découper le texte</li>
+                    <li><strong>Pôle :</strong> mot-clé pour grep et concordancier</li>
+                    <li><strong>Longueur :</strong> longueur minimale des tokens</li>
+                    <li><strong>Dictionnaire :</strong> formes uniques triées par fréquence</li>
+                </ul>
+            </div>
+              <!-- Bloc des paramètres et boutons de fonctions -->
+            <div id="page-wrapper">
+                <!-- Input pour sélectionner un fichier texte local -->
+                <div>
+                    <label for="fileInput"><small>Sélectionner un fichier au format .txt :</small></label>
+                    <input id="fileInput" type="file" accept="text/plain" />
+                </div>
+                <br />
+                <p style="text-align:center;">
+                    <!-- Champ des délimiteurs utilisés pour la segmentation -->
+                    <small>
+                        <label for="delimID" class="mylabel">Délimiteur(s)</label>
+                        &nbsp;
+                        <input type="text" value=" ,;''~|&#@=`-.?!%*$()[]{}_:+«»§\/" name="delim" id="delimID" size="40" />
+                    </small>
+                    <br />
+                    <!-- Champ pôle : mot recherché pour grep et concordancier -->
+                    <small>
+                        <label for="poleID" class="mylabel">Pôle</label>
+                        &nbsp;
+                        <input type="text" placeholder="entrez un pôle..." name="pole" id="poleID" size="20" />
+                    </small>
+                    &nbsp;
+                    <!-- Champ longueur : longueur minimale des tokens ou taille du contexte -->
+                    <small>
+                        <label for="lgID" class="mylabel">Longueur</label>
+                        &nbsp;
+                        <input type="text" value="10" name="lg" id="lgID" size="10" />
+                    </small>
+                    <br /><br />
+                    <!-- Bouton de bienvenue-->
+                    <button onclick="alert('Bienvenue dans l\'outil d\'analyse textuelle !');">Bonjour</button>
+                    <br /><br />
+                     <!-- Galerie circulaire des boutons de fonctions -->
+                    <div id="circular-gallery">
+                        <!-- Chaque bouton appelle une fonction définie dans code.js -->
+                    <button class="submit" onclick="segmentation()"><span>Segmentation</span></button>
+                    <button class="submit" onclick="dictionnaire()"><span>Dictionnaire</span></button>
+                    <button class="submit" onclick="grep()">Grep</button>
+                    <button class="submit" onclick="concordancier()">Concordancier</button>
+                    <button class="submit" onclick="camembert()">Graphe</button>
+                </p>
+                <div id="page-analysis">
+    <canvas id="camembert-canvas" width="300" height="300" style="display:none;"></canvas></div>
+            </div>
+            <br />
+             <!-- Conteneur des deux zones d'affichage côte à côte -->
+            <div id="Global">
+                <div id="fileDisplayArea"></div>
+                <div id="page-analysis"></div>
+            </div>
+             <!-- Zone d'affichage des messages de statut (succès / erreur) -->
+            <div id="logger" style="width:100%"></div>
+        </div>
+    </div>
+</body>
 </html>
